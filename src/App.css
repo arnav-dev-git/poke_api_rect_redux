@@ -83,24 +83,32 @@
 }
 
 .search_wrapper > button {
-  padding: 4px 10px;
+  padding: 7px 10px;
   background: #fff;
-  border: 2px solid #9bde59;
+  border: 2px solid #4989ff;
   cursor: pointer;
-  box-shadow: inset 0 0 #9bde59;
+  box-shadow: inset 0 0 #4989ff;
   transition: all 0.3s ease;
 }
 .search_wrapper > button:hover {
-  box-shadow: inset 300px 0 #9bde59;
+  box-shadow: inset 300px 0 #4989ff;
   color: white;
 }
+
+.search_wrapper > button:focus {
+  box-shadow: inset 300px 0 #4989ff;
+  color: white;
+  outline: none;
+}
+
 .search_wrapper > button:active {
-  transform: translateY(2px);
+  transform: translateX(2px);
 }
 
 .search_wrapper > input {
   height: 23.5px;
   border: 2px solid #9bde59;
+  padding: 3px 5px;
 }
 
 .pageNo {
