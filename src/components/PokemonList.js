@@ -12,11 +12,16 @@ const PokemonList = (props) => {
   const dispatch = useDispatch();
   const pokemonList = useSelector((state) => state.PokemonList);
 
+  const [pageNo, setPageNo] = useState(props.match.params.page);
+  if (pageNo === undefined) {
+    setPageNo(1);
+  }
+
   useEffect(() => {
-    fetchData(1);
+    fetchData(pageNo);
   }, []);
 
-  const fetchData = (page = 1) => {
+  const fetchData = (page = pageNo) => {
     dispatch(GetPokemonList(page));
   };
 
@@ -59,7 +64,7 @@ const PokemonList = (props) => {
         <button onClick={() => props.history.push(`/pokemon/${search}`)}>
           Search
         </button>
-        <p className="pageNo">Page No: {currentPage}</p>
+        <p className="pageNo">Page No: {pageNo}</p>
       </div>
       {showData()}
       {!_.isEmpty(pokemonList.data) && (
@@ -68,8 +73,9 @@ const PokemonList = (props) => {
           pageRangeDisplayed={2}
           marginPagesDisplayed={1}
           onPageChange={(data) => {
-            setCurrentPage(data.selected + 1);
+            setPageNo(data.selected + 1);
             fetchData(data.selected + 1);
+            props.history.push(`/${data.selected + 1}`);
           }}
           containerClassName={"pagination_app"}
           activeClassName="active_page"

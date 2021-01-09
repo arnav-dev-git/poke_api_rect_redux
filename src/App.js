@@ -10,6 +10,7 @@ function App() {
       <Navbar />
       <Switch>
         <Route path={"/"} exact component={PokemonList} />
+        <Route path={"/:page"} exact component={PokemonList} />
         <Route path={"/pokemon/:pokemon"} exact component={Pokemon} />
         <Redirect to="/" />
       </Switch>
