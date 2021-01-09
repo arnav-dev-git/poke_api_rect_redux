@@ -7,6 +7,7 @@ import ReactPaginate from "react-paginate";
 
 const PokemonList = (props) => {
   const [search, setSearch] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
 
   const dispatch = useDispatch();
   const pokemonList = useSelector((state) => state.PokemonList);
@@ -58,6 +59,7 @@ const PokemonList = (props) => {
         <button onClick={() => props.history.push(`/pokemon/${search}`)}>
           Search
         </button>
+        <p className="pageNo">Page No: {currentPage}</p>
       </div>
       {showData()}
       {!_.isEmpty(pokemonList.data) && (
@@ -65,7 +67,10 @@ const PokemonList = (props) => {
           pageCount={Math.ceil(pokemonList.count / 15)}
           pageRangeDisplayed={2}
           marginPagesDisplayed={1}
-          onPageChange={(data) => fetchData(data.selected + 1)}
+          onPageChange={(data) => {
+            setCurrentPage(data.selected + 1);
+            fetchData(data.selected + 1);
+          }}
           containerClassName={"pagination_app"}
           activeClassName="active_page"
         />
