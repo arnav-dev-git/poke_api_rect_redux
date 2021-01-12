@@ -8,6 +8,10 @@ const Pokemon = (props) => {
   const dispatch = useDispatch();
   const pokemonState = useSelector((state) => state.Pokemon);
 
+  // console.log(pokemonState);
+  const errorMessage = pokemonState.errMsg;
+  console.log(errorMessage, "errMsg from action");
+
   useEffect(() => {
     dispatch(GetPokemon(pokemonName));
   }, []);

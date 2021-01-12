@@ -18,6 +18,7 @@ export const GetPokemonList = (page) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: "POKEMON_LIST_FAIL",
+      payload: err.message,
     });
   }
 };
@@ -37,7 +38,9 @@ export const GetPokemon = (pokemon) => async (dispatch) => {
     });
   } catch (err) {
     dispatch({
-      type: "POKEMON_MULTIPLE_ERROR",
+      type: "POKEMON_MULTIPLE_FAIL",
+      payload: err,
     });
+    console.log(err, "from action error");
   }
 };

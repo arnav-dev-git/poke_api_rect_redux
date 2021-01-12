@@ -19,7 +19,7 @@
   justify-content: space-between;
   border: 2px solid #9bde59;
   border-radius: 5px;
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
 .pokemon_item:hover,
