@@ -118,41 +118,11 @@
   color: rgb(153, 153, 153);
 }
 
-.pagination_app {
+.pagination_container {
   margin: 15px auto;
+  margin-bottom: 40px;
   display: flex;
+  justify-content: center;
   list-style: none;
   outline: none;
-}
-.pagination_app > .active > a {
-  background-color: #9bde59;
-  border-color: #9bde59;
-  color: #fff;
-}
-.pagination_app > li > a {
-  border: 1px solid #9bde59;
-  padding: 5px 10px;
-  outline: none;
-  cursor: pointer;
-}
-.pagination_app > .active > a,
-.pagination_app > .active > span,
-.pagination_app > .active > a:hover,
-.pagination_app > .active > span:hover,
-.pagination_app > .active > a:focus,
-.pagination_app > .active > span:focus {
-  background: #9bde59;
-  border-color: #9bde59;
-  outline: none;
-  cursor: pointer;
-}
-.pagination_app > li > a,
-.pagination_app > li > span {
-  background-color: #9bde59;
-}
-.pagination_app > li:first-child > a,
-.pagination_app > li:first-child > span,
-.pagination_app > li:last-child > a,
-.pagination_app > li:last-child > span {
-  border-radius: 2px;
 }

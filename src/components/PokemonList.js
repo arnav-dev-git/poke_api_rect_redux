@@ -3,7 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 import { GetPokemonList } from "../actions/PokemonActions";
 import { Link } from "react-router-dom";
-import ReactPaginate from "react-paginate";
+import { makeStyles } from "@material-ui/core/styles";
+import Pagination from "@material-ui/lab/Pagination";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& > *": {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
 
 const PokemonList = (props) => {
   const [search, setSearch] = useState();
@@ -11,14 +20,16 @@ const PokemonList = (props) => {
   const dispatch = useDispatch();
   const pokemonList = useSelector((state) => state.PokemonList);
 
-  const [pageNo, setPageNo] = useState(props.match.params.page);
+  let getPageNo = props.match.params.page;
+  const [pageNo, setPageNo] = useState(
+    getPageNo === undefined ? 1 : Number(getPageNo)
+  );
 
-  if (pageNo === undefined) {
-    setPageNo(1);
-  }
+  const classes = useStyles();
 
   useEffect(() => {
     fetchData(pageNo);
+    console.log(getPageNo);
   }, [pageNo]);
 
   const fetchData = (page = pageNo) => {
@@ -68,18 +79,20 @@ const PokemonList = (props) => {
       </div>
       {showData()}
       {!_.isEmpty(pokemonList.data) && (
-        <ReactPaginate
-          pageCount={Math.ceil(pokemonList.count / 15)}
-          pageRangeDisplayed={2}
-          marginPagesDisplayed={1}
-          activeClassName="active_page"
-          onPageChange={(data) => {
-            setPageNo(data.selected + 1);
-            fetchData(data.selected + 1);
-            props.history.push(`/${data.selected + 1}`);
-          }}
-          containerClassName={"pagination_app"}
-        />
+        <div className="pagination_container">
+          <div className={classes.root}>
+            <Pagination
+              count={Math.ceil(pokemonList.count / 15)}
+              variant="outlined"
+              color="secondary"
+              page={pageNo}
+              onChange={(e, val) => {
+                setPageNo(Number(val));
+                props.history.push(`/${val}`);
+              }}
+            />
+          </div>
+        </div>
       )}
     </div>
   );
