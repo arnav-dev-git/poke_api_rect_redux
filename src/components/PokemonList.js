@@ -29,7 +29,6 @@ const PokemonList = (props) => {
 
   useEffect(() => {
     fetchData(pageNo);
-    console.log(getPageNo);
   }, [pageNo]);
 
   const fetchData = (page = pageNo) => {
@@ -66,15 +65,22 @@ const PokemonList = (props) => {
     <div>
       <div className="search_wrapper">
         <p style={{ marginRight: "10px" }}>Search: </p>
-        <input
-          type="text"
-          name="search"
-          id="search-text"
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <button onClick={() => props.history.push(`/pokemon/${search}`)}>
-          Search
-        </button>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            props.history.push(`/pokemon/${search}`);
+          }}
+        >
+          <input
+            type="text"
+            name="search"
+            id="search-text"
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+          />
+          <button type="submit">Search</button>
+        </form>
         <p className="pageNo">Page No: {pageNo}</p>
       </div>
       {showData()}
