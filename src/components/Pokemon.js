@@ -54,7 +54,19 @@ const Pokemon = (props) => {
     }
 
     if (pokemonState.errMsg !== "") {
-      return <p>{pokemonState.errMsg}</p>;
+      return (
+        <>
+          <p>{pokemonState.errMsg}</p>
+          <button
+            type="button-err"
+            onClick={() => {
+              window.history.back();
+            }}
+          >
+            Go Back
+          </button>
+        </>
+      );
     }
 
     return <p>error getting the pokemon</p>;
